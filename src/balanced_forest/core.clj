@@ -59,6 +59,14 @@
 (defn get-forest-cost [forest cost-map]
   (reduce + (map #(get cost-map %) forest)))
 
+(defn map-forest-to-cost [forest cost-map]
+  (let [forest-cost (get-forest-cost forest cost-map)]
+    (hash-map forest-cost forest)
+    ))
+
+;(defn balance-forest-check [forests cost-map]; after multiple calls to (get-forest ..)
+;(map #(get-forest-cost % cost-map) forests)
+
 ;(defn balancedForest [c edges]
 ;  )
 

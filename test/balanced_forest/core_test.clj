@@ -70,3 +70,13 @@
            (+ 4 3)
            (get-forest-cost forest cost-map)
            )))))
+
+(deftest get-forest-cost-test
+  (testing "Should return a hash-map of the forest and its cost"
+    (let [costs (get-costs (list 4 3 2 1))
+          cost-map (costs-as-hash-map costs)
+          edges (list (list 1 2) (list 4 3))
+          forest (get-forest 1 edges)]
+      (is (= (map-forest-to-cost forest cost-map)
+             (hash-map 7 forest)
+             )))))
