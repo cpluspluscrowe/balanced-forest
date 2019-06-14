@@ -98,3 +98,28 @@
        (is (= (second (first sorted-forests))
               forest2)) ; because it is sorted by cost
 )))
+
+
+(deftest has-three-forests-happy-path-test
+  (testing "Should detect if we have three distinct forests"
+    (let [costs (get-costs (list 4 3 2 1))
+          cost-map (costs-as-hash-map costs)
+          edges (list (list 1 2) (list 4 3))
+          same-forest (get-forest 1 edges)]
+    (is (=
+         false
+         (has-three-forests same-forest same-forest same-forest)
+         )))))
+
+(deftest has-three-forests-test
+  (testing "Should detect if we have three distinct forests"
+    (let [costs (get-costs (list 1 2 3 4 5 6))
+          cost-map (costs-as-hash-map costs)
+          edges (list (list 1 2) (list 3 4) (list 5 6))
+          forest1 (get-forest 1 edges)
+          forest2 (get-forest 3 edges)
+          forest3 (get-forest 5 edges)]
+      (is (=
+           true
+           (has-three-forests forest1 forest2 forest3)
+           )))))

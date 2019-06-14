@@ -67,11 +67,15 @@
 (defn get-sorted-forests-by-cost [forests cost-map]
   (into (sorted-map) (reduce merge (map #(map-cost-to-forest % cost-map) forests))))
 
-;(defn balance-forest-check [forests cost-map]; after multiple calls to (get-forest ..)
-
-
-;(defn balancedForest [c edges]
-;  )
+(defn has-three-forests [forest1 forest2 forest3]
+  (if
+      (and
+       (not (= forest1 forest2))
+       (not (= forest2 forest3))
+       (not (= forest1 forest3))
+       )
+    true
+    false))
 
 (defn -main
   "See tests for function examples"
