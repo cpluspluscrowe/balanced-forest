@@ -123,3 +123,16 @@
            true
            (has-three-forests forest1 forest2 forest3)
            )))))
+
+(deftest set-correctly-counts-forests
+  (testing "Should detect if we have three distinct forests"
+    (let [costs (get-costs (list 1 2 3 4))
+          cost-map (costs-as-hash-map costs)
+          edges (list (list 1 2) (list 3 4))
+          forest1 (get-forest 1 edges)
+          forest2 (get-forest 3 edges)
+          combined-forests (set (list forest1 forest1 forest1 forest2))]
+      (is (=
+           (count combined-forests)
+           2
+           )))))
