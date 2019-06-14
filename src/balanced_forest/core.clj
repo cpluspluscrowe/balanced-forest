@@ -1,4 +1,5 @@
 (ns balanced-forest.core
+  (:require [clojure.set])
   (:gen-class))
 
 (defn edge-to-hash-map [edge]
@@ -9,10 +10,14 @@
 (defn edges-to-dict [edges]
   (reduce merge (map edge-to-hash-map edges)))
 
-(defn get-forest [edge edges]
-  (let [already-visited (list)]
-
-  ))
+(defn get-forest
+  ([edge edges] (get-forest edge edges (hash-set edge)))
+  ([edge edges already-visited]
+   (let [edge-dict (edges-to-dict edges)
+         connections (clojure.set/difference (hash-set (get edge-dict edge)) already-visited)]
+     (if (empty? connections) (hash-set edge)
+     (reduce conj (map #(get-forest % edges (conj already-visited %)) connections)))
+)))
 
 (defn balancedForest [c edges]
 
