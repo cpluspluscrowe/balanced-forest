@@ -95,4 +95,6 @@
               forest1))
        (is (= (get sorted-forests forest2-cost)
               forest2))
+       (is (= (second (first sorted-forests))
+              forest2)) ; because it is sorted by cost
 )))
