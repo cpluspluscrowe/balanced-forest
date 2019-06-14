@@ -21,8 +21,6 @@
 (defn edges-to-dict [edges]
   (reduce merge-hash-maps (map edge-to-hash-map edges)))
 
-(into #{} [1 2 3 4])
-
 (defn get-connections [edge edge-dict already-visited]
   (let [all-connections (get edge-dict edge)
         all-connections-as-hash-set (into #{} all-connections)]
@@ -61,11 +59,10 @@
 (defn get-forest-cost [forest cost-map]
   (reduce + (map #(get cost-map %) forest)))
 
-(defn balancedForest [c edges]
-
-  )
+;(defn balancedForest [c edges]
+;  )
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "See tests for function examples"
   [& args]
-  (println "Hello, World!"))
+  (println "Still need to setup inputs to main"))
