@@ -32,7 +32,6 @@
 (defn get-forest
   ([edge edges]
    (let [edge-dict (edges-to-dict edges)]
-     (println edge edge-dict (hash-set))
      (get-forest edge edge-dict (hash-set))))
   ([edge edge-dict already-visited]
    (let [connections (get-connections edge edge-dict already-visited)
@@ -58,6 +57,9 @@
   (let [indexes (range 1 (+ 1 (count costs)))]
     (map vector indexes costs)
     ))
+
+(defn get-forest-cost [forest cost-map]
+  (reduce + (map #(get cost-map %) forest)))
 
 (defn balancedForest [c edges]
 
