@@ -9,7 +9,7 @@
 (deftest edges-to-dict-test
   (testing "converting a list of edges into a dictionary"
     (let [edges (list (list 1 2))]
-      (is (= (edges-to-dict edges) (hash-map 1 2 2 1)
+      (is (= (edges-to-dict edges) (hash-map 1 (list 2) 2 (list 1))
              )))))
 
 (deftest edges-to-dict-multiple-test
@@ -20,8 +20,8 @@
 
 (deftest get-forest-test
   (testing "Getting a set of all nodes connected to the edge"
-    (is (= (get-forest 1 (list (list 1 2))) (hash-set 2)))
-    ))
+    (is (= (get-forest 1 (list (list 1 2)))
+           ))))
 
 (deftest get-connections-test
   (testing "Getting relevant connections to an edge"

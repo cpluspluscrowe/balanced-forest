@@ -5,7 +5,7 @@
 (defn edge-to-hash-map [edge]
   (let [p1 (first edge)
         p2 (second edge)]
-    (hash-map p1 p2 p2 p1)))
+    (hash-map p1 (list p2) p2 (list p1))))
 (defn get-hash-map-value-as-list [key hm]
   (let [value (get hm key)]
     (if (list? value) value
@@ -30,12 +30,17 @@
     ))
 
 (defn get-forest
-  ([edge edges] (get-forest edge edges (hash-set edge)))
-  ([edge edges already-visited]
-   (let [edge-dict (edges-to-dict edges)
-         connections (clojure.set/difference (hash-set (get edge-dict edge)) already-visited)]
+  ([edge edges]
+   (let [edge-dict (edges-to-dict edges)]
+     (println edge edge-dict (hash-set))
+     (get-forest edge edge-dict (hash-set))))
+  ([edge edge-dict already-visited]
+   (let [connections (get-connections edge edge-dict already-visited)]
+     (println connections)
      (if (empty? connections) (hash-set edge)
-     (reduce conj (map #(get-forest % edges (conj already-visited %)) connections)))
+         (reduce conj
+                 (map #(get-forest % edge-dict (conj already-visited %)) connections)
+                 ))
 )))
 
 (defn balancedForest [c edges]
