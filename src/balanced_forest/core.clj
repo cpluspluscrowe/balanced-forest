@@ -35,13 +35,15 @@
      (println edge edge-dict (hash-set))
      (get-forest edge edge-dict (hash-set))))
   ([edge edge-dict already-visited]
-   (let [connections (get-connections edge edge-dict already-visited)]
-     (println connections)
+   (let [connections (get-connections edge edge-dict already-visited)
+         already-visited-updated (conj already-visited edge)]
+         ; Since I added edge to already visited, it needs to somehow be returned as part of the forest
      (if (empty? connections) (hash-set edge)
-         (reduce conj
-                 (map #(get-forest % edge-dict (conj already-visited %)) connections)
+         (reduce conj (reduce flatten
+                 (map #(get-forest % edge-dict (conj already-visited-updated)) connections))
+                 (hash-set edge))
                  ))
-)))
+))
 
 (defn balancedForest [c edges]
 

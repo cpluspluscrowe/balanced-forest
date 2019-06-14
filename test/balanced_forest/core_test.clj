@@ -23,6 +23,16 @@
     (is (= (get-forest 1 (list (list 1 2)))
            ))))
 
+(deftest get-forest-empty-test
+  (testing "Getting a set of all nodes connected to the edge"
+    (is (= (get-forest 3 (list (list 1 2))) (hash-set 3)
+           ))))
+
+(deftest get-forest-multiple-test
+  (testing "Getting a set of all nodes connected to the edge"
+    (is (= (get-forest 1 (list (list 1 2) (list 2 3))) (hash-set 1 2 3)
+           ))))
+
 (deftest get-connections-test
   (testing "Getting relevant connections to an edge"
     (is (= (get-connections 1 (hash-map 1 (list 2 3)) (hash-set 2)) (hash-set 3)))))
