@@ -60,3 +60,13 @@
            6
            (get-forest-cost forest cost-map)
            )))))
+
+(deftest get-forest-cost-from-two-forests-test
+  (testing "Should calculate the cost within a forest"
+    (let [costs (get-costs (list 4 3 2 1))
+          cost-map (costs-as-hash-map costs)
+          forest (get-forest 1 (list (list 1 2) (list 4 3)))]
+      (is (=
+           (+ 4 3)
+           (get-forest-cost forest cost-map)
+           )))))
