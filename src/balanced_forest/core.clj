@@ -45,6 +45,15 @@
                  ))
    ))
 
+(defn cost-pair-to-mapping [cost-pair]
+  (let [index (first cost-pair)
+        cost (second cost-pair)]
+    (hash-map index cost)
+    ))
+
+(defn costs-as-hash-map [costs]
+  (reduce merge (map cost-pair-to-mapping costs)))
+
 (defn get-costs [costs]
   (let [indexes (range 1 (+ 1 (count costs)))]
     (map vector indexes costs)

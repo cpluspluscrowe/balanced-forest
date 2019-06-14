@@ -42,3 +42,11 @@
     (is (= (get-costs (list 3 2 1))
            (list [1 3] [2 2] [3 1])
            ))))
+
+(deftest get-costs-in-hash-map-test
+  (testing "We transform cost vectors into a map"
+    (let [costs (get-costs (list 3 2 1))]
+    (is (=
+         (costs-as-hash-map costs)
+         (hash-map 1 3 2 2 3 1)
+         )))))
