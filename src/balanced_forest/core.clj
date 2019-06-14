@@ -43,7 +43,12 @@
                  (map #(get-forest % edge-dict (conj already-visited-updated)) connections))
                  (hash-set edge))
                  ))
-))
+   ))
+
+(defn get-costs [costs]
+  (let [indexes (range 1 (+ 1 (count costs)))]
+    (map vector indexes costs)
+    ))
 
 (defn balancedForest [c edges]
 
