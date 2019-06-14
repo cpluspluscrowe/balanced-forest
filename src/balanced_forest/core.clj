@@ -21,6 +21,14 @@
 (defn edges-to-dict [edges]
   (reduce merge-hash-maps (map edge-to-hash-map edges)))
 
+(into #{} [1 2 3 4])
+
+(defn get-connections [edge edge-dict already-visited]
+  (let [all-connections (get edge-dict edge)
+        all-connections-as-hash-set (into #{} all-connections)]
+    (clojure.set/difference all-connections-as-hash-set already-visited)
+    ))
+
 (defn get-forest
   ([edge edges] (get-forest edge edges (hash-set edge)))
   ([edge edges already-visited]
